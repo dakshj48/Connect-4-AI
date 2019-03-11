@@ -1,3 +1,5 @@
+import sys
+
 class ConnectFourBoard:  # X is 0 and O is 1#
     map = None
     turn = None
@@ -44,4 +46,22 @@ class ConnectFourBoard:  # X is 0 and O is 1#
             util = -1
         return util
 
-    def 
+    def check_row(self):
+
+    def check_col(self):
+
+    def check_diag(self):
+
+    def check_antidiag(self):
+
+    def min_value(self):
+
+    def max_value(self):
+
+    def minimax_decision(self):
+
+    def print_move(self):
+
+    def next_states(self):
+
+    def terminal_test(self):
