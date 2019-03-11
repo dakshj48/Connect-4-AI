@@ -1,5 +1,3 @@
-import sys
-
 class ConnectFourBoard:  # X is 0 and O is 1#
     map = None
     turn = None
