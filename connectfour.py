@@ -27,6 +27,8 @@ class ConnectFourBoard:  # X is 0 and O is 1#
                 x += 1
             elif i is 1:
                 o += 1
+        if abs(x-o) > 1:
+            return -1  # "Invalid board!"#
         if x > o:
             return 1
         else:
@@ -34,10 +36,10 @@ class ConnectFourBoard:  # X is 0 and O is 1#
 
     def get_Utility(self):
         util = 0
-        row = check_row()
-        col = check_col()
-        diag = check_diag()
-        antidiag = check_antidiag()
+        row = self.check_row()
+        col = self.check_col()
+        diag = self.check_diag()
+        antidiag = self.check_antidiag()
         if row[0] or col[0] or diag[0] or antidiag[0]:
             util = 1
         elif row[1] or col[1] or diag[1] or antidiag[1]:
@@ -45,12 +47,86 @@ class ConnectFourBoard:  # X is 0 and O is 1#
         return util
 
     def check_row(self):
+        ret = {0: False, 1: False}
+        i = 0
+        while i < 39:
+            val = self.map.get(i)
+            for x in range(1,4):
+                if val != self.map.get(i+x):
+                    break
+                if x == 3:
+                    ret[val] = True
+                    return ret
+            if i%7 == 3
+                i += 3
+            i += 1
+        return ret
 
     def check_col(self):
+        ret = {0: False, 1: False}
+        i = 0
+        while i < 21:
+            val = self.map.get(i)
+            for x in range(1, 4):
+                if val != self.map.get(i+x*7):
+                    break
+                if x == 3:
+                    ret[val] = True
+                    return ret
+            i += 1
+        return ret
 
     def check_diag(self):
+        ret = {0: False, 1: False}
+        i = 0
+        while i < 18:
+            val = self.map.get(i)
+            for x in range(1, 4):
+                if val != self.map.get(i+x*8):
+                    break
+                if x == 3:
+                    ret[val] = True
+                    return ret
+            i += 1
+            if i == 4:
+                i = 7
+            elif i == 11:
+                i = 14
+        return ret
 
     def check_antidiag(self):
+        ret = {0: False, 1: False}
+        i = 3
+        while i < 21:
+            val = self.map.get(i)
+            for x in range(1, 4):
+                if val != self.map.get(i+x*6):
+                    break
+                if x == 3:
+                    ret[val] = True
+            i += 1
+            if i == 7:
+                i = 10
+            elif i == 14:
+                i = 17
+        return ret
+
+    def check_tie(self):
+        for x in lst:
+            if x == -1:
+                return False
+        return True
+
+    def valid_board(self):
+        i = 0
+        while i < 21:
+            val = self.map.get(i)
+            if val == -1:
+                for x in range(1, 4):
+                    if val != self.map.get(i + x * 7):
+                        return False
+            i += 1
+        return True
 
     def min_value(self):
 
