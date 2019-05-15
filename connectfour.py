@@ -1,3 +1,48 @@
+import connectfour
+import sys
+
+
+class ConnectFour:
+
+    def solver(self, filename):
+        try:
+            file = open(filename, "r")
+            lst = []
+            count = 0
+            for line in file:
+                if len(line) != 8:
+                    raise ValueError()
+                count += 1
+                for x in range(0, len(line)):
+                    if line[len(line)-x-2] == ".":
+                        lst.append(-1)
+                    elif line[len(line)-x-2] == 'X':
+                        lst.append(0)
+                    elif line[len(line)-x-2] == 'O':
+                        lst.append(1)
+            print(len(lst))
+            board = connectfour.ConnectFourBoard(lst)
+            ret = board.minimax_decision()
+            board.print_move(ret)
+            if count != 6:
+                raise ValueError()
+            file.close()
+        except IOError:
+            file.close()
+            print("Cannot open the file.")
+        except ValueError:
+            file.close()
+            print("Incorrect board dimensions.")
+
+    if __name__ == "__main__":
+        if len(sys.argv)-1 != 1:
+            print("Need 1 argument.")
+        else:
+            file = sys.argv[1]
+            run = connectfour.ConnectFour()
+            run.solver(file)
+
+
 class ConnectFourBoard:  # X is 0 and O is 1#
     map = None
     turn = None
@@ -9,7 +54,7 @@ class ConnectFourBoard:  # X is 0 and O is 1#
             self.parent = None
             self.map = {}
             for x in range(0, 42):
-                self.map[x] = lst[42-x]
+                self.map[x] = lst[41-x]
             self.turn = self.get_turn(lst)
         else:
             self.map = {}
